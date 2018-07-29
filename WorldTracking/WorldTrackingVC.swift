@@ -9,8 +9,9 @@
 import UIKit
 import ARKit
 
-class ViewController: UIViewController {
 
+class WorldTrackingVC: UIViewController {
+    static let storyboardId = "WorldTrackingVC"
     @IBOutlet weak var sceneView: ARSCNView!
     
     // ARWorldTrackingConfiguration tracks position of the device relative to the real world.
@@ -159,7 +160,9 @@ class ViewController: UIViewController {
     
     @IBAction func addNodeAction(_ sender: Any) {
         addHouse()
+        
 //        addBezierPath()
+        
 //        addPlane()
 //        addPyramid()
 //        addTorus()
@@ -170,6 +173,7 @@ class ViewController: UIViewController {
 //        addCapsule()
 //        addBox()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
@@ -177,11 +181,11 @@ class ViewController: UIViewController {
         self.sceneView.autoenablesDefaultLighting = true // Gives the world a light source.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
-
-
+    override func viewDidDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
 }
 
