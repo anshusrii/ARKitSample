@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ARKit
 
 class SelectOptionsVC: UITableViewController {
 
@@ -65,3 +66,31 @@ class SelectOptionsVC: UITableViewController {
     }
 
 }
+
+extension Float {
+    static func random(min: Float, max: Float) -> Float {
+        return (Float(arc4random()) / 0xFFFFFFFF) * (max - min) + min
+    }
+}
+
+extension ARSCNView {
+    struct MyCameraCoordinates {
+        var x = Float()
+        var y = Float()
+        var z = Float()
+    }
+    
+    func getCameraCoordinates () -> MyCameraCoordinates {
+        guard let cameraTransform = self.session.currentFrame?.camera.transform else {return MyCameraCoordinates(x: 0, y: 0, z: 0) }
+        
+        let cameraCoordinates = MDLTransform(matrix: cameraTransform) // Model Transform
+        
+        var cc = MyCameraCoordinates()
+        cc.x = cameraCoordinates.translation.x
+        cc.y = cameraCoordinates.translation.y
+        cc.z = cameraCoordinates.translation.z - 0.2
+        
+        return cc
+    }
+}
+

@@ -156,6 +156,9 @@ class WorldTrackingVC: UIViewController {
         
         doorNode.position = SCNVector3(0,-0.02,0.053)
         boxNode.addChildNode(doorNode)
+        
+        let cameraCoords = self.sceneView.getCameraCoordinates()
+        node.position = SCNVector3Make(cameraCoords.x, cameraCoords.y, cameraCoords.z)
     }
     
     @IBAction func addNodeAction(_ sender: Any) {
@@ -177,6 +180,7 @@ class WorldTrackingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        configuration.planeDetection = .horizontal
         self.sceneView.session.run(configuration, options: [])
         self.sceneView.autoenablesDefaultLighting = true // Gives the world a light source.
     }
