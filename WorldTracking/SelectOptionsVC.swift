@@ -11,7 +11,7 @@ import ARKit
 
 class SelectOptionsVC: UITableViewController {
 
-    let optionsArr : [String] = ["Word Tracking", "Object Detection"]
+    let optionsArr : [String] = ["Word Tracking", "Object Detection", "Plane Detection"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +56,11 @@ class SelectOptionsVC: UITableViewController {
             
         case 1:
             guard let vc = storyboard?.instantiateViewController(withIdentifier: ObjectDetectionVC.storyboardId) else {return}
+            vc.navigationController?.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        case 2:
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: PlaneDetectionVC.storyboardId) else {return}
             vc.navigationController?.isNavigationBarHidden = true
             self.navigationController?.pushViewController(vc, animated: true)
             

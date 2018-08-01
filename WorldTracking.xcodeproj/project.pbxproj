@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		400C1F76211213D6007B9775 /* PlaneDetectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400C1F75211213D6007B9775 /* PlaneDetectionVC.swift */; };
 		40D46A6A210C5F2300A34F10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D46A69210C5F2300A34F10 /* AppDelegate.swift */; };
 		40D46A6C210C5F2300A34F10 /* WorldTrackingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D46A6B210C5F2300A34F10 /* WorldTrackingVC.swift */; };
 		40D46A6F210C5F2300A34F10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40D46A6D210C5F2300A34F10 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		400C1F75211213D6007B9775 /* PlaneDetectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneDetectionVC.swift; sourceTree = "<group>"; };
 		40D46A66210C5F2300A34F10 /* WorldTracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldTracking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D46A69210C5F2300A34F10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40D46A6B210C5F2300A34F10 /* WorldTrackingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTrackingVC.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				40D46A7B210DC12800A34F10 /* SelectOptionsVC.swift */,
 				40D46A6B210C5F2300A34F10 /* WorldTrackingVC.swift */,
 				40D46A7D210DC2D900A34F10 /* ObjectDetectionVC.swift */,
+				400C1F75211213D6007B9775 /* PlaneDetectionVC.swift */,
 				40D46A6D210C5F2300A34F10 /* Main.storyboard */,
 				40D46A70210C5F2700A34F10 /* Assets.xcassets */,
 				40D46A72210C5F2700A34F10 /* LaunchScreen.storyboard */,
@@ -153,6 +156,7 @@
 				40D46A7E210DC2D900A34F10 /* ObjectDetectionVC.swift in Sources */,
 				40D46A7C210DC12800A34F10 /* SelectOptionsVC.swift in Sources */,
 				40D46A6A210C5F2300A34F10 /* AppDelegate.swift in Sources */,
+				400C1F76211213D6007B9775 /* PlaneDetectionVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

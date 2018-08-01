@@ -13,7 +13,6 @@
         <!--Root View Controller-->
         <scene sceneID="Hj0-U8-LTK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c02-rf-owt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="YfX-YE-nlP" customClass="SelectOptionsVC" customModule="WorldTracking" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="e1x-6R-1pC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -36,6 +35,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="F2C-7X-MNZ"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c02-rf-owt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-303" y="-42"/>
         </scene>
@@ -66,7 +66,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9c-wX-7UK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="80" y="-225"/>
+            <point key="canvasLocation" x="606" y="-43"/>
+        </scene>
+        <!--Plane DetectionVC-->
+        <scene sceneID="uMi-d8-6bJ">
+            <objects>
+                <viewController storyboardIdentifier="PlaneDetectionVC" id="1Qo-Cv-YyX" customClass="PlaneDetectionVC" customModule="WorldTracking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="S8R-SG-Fkl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6Q-jv-3zE">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </arscnView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="c6Q-jv-3zE" firstAttribute="leading" secondItem="VvO-5H-M4h" secondAttribute="leading" id="4yb-K8-ZHc"/>
+                            <constraint firstItem="c6Q-jv-3zE" firstAttribute="top" secondItem="VvO-5H-M4h" secondAttribute="top" id="RFe-pr-4TH"/>
+                            <constraint firstItem="VvO-5H-M4h" firstAttribute="bottom" secondItem="c6Q-jv-3zE" secondAttribute="bottom" id="ebh-ww-Dds"/>
+                            <constraint firstItem="VvO-5H-M4h" firstAttribute="trailing" secondItem="c6Q-jv-3zE" secondAttribute="trailing" id="iMb-2e-oDV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VvO-5H-M4h"/>
+                    </view>
+                    <connections>
+                        <outlet property="sceneView" destination="c6Q-jv-3zE" id="CZK-sd-rc9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PsZ-6t-4Gy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="606" y="639"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FwO-mm-ghh">
@@ -143,6 +172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="607" y="-775"/>
         </scene>
     </scenes>
 </document>
