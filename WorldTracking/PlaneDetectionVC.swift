@@ -23,17 +23,49 @@ class PlaneDetectionVC: UIViewController, ARSCNViewDelegate {
 //        guard let scene = SCNScene(named: "art.scnassets/ObjectDetection.scn") else {return}
         let scene = SCNScene()
         sceneView.scene = scene
+        
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(handleScreenTap))
+        sceneView.addGestureRecognizer(tapGR)
     }
+    
+    @objc private func handleScreenTap(_ tapGR: UITapGestureRecognizer) {
+        guard let tappedSceneView = tapGR.view as? ARSCNView else { return }
+        let tapLocation = tapGR.location(in: tappedSceneView)
+        
+        let planeIntersenctions = tappedSceneView.hitTest(tapLocation, types: [.existingPlaneUsingGeometry])
+        if !planeIntersenctions.isEmpty {
+            let firstHitTestResult = planeIntersenctions.first!
+            guard let planeAnchor = firstHitTestResult.anchor as? ARPlaneAnchor else { return }
+            if planeAnchor.alignment == .horizontal {
+                // Add some item on horizontal plane
+            }
+        }
+    }
+    /*
+    private addObjectToPlane (hitTestResult: ARHitTestResult) {
+     let transform = hitTestResult.worldTransform
+     let positionColumn = transform.columns.3
+     let initialPosition = SCNVector3(positionColumn.x, positionColumn.y, positionColumn.z)
+     
+    }
+ */
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
         
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = [.horizontal]
-        configuration.isLightEstimationEnabled = true
+        let configuration = createARConfiguration()
         sceneView.session.run(configuration, options: [])
         
+    }
+    
+    private func createARConfiguration() -> ARConfiguration {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.worldAlignment = .gravity
+        configuration.planeDetection = [.horizontal]
+        configuration.isLightEstimationEnabled = true
+//        configuration.providesAudioData = false // Experiment on it
+        return configuration
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -41,24 +73,30 @@ class PlaneDetectionVC: UIViewController, ARSCNViewDelegate {
     }
     
     // MARK: - ARSCNViewDelegate
+    private func drawPlaneNode(anchor: ARPlaneAnchor, node: SCNNode) {
+        let plane = VirtualPlane(anchor: anchor)
+        self.planes[anchor.identifier] = plane
+        node.addChildNode(plane)
+    }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        if let planeAnchor = anchor as? ARPlaneAnchor {
-            let plane = VirtualPlane(anchor: planeAnchor)
-            self.planes[planeAnchor.identifier] = plane
-            node.addChildNode(plane)
-        }
+        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+        drawPlaneNode(anchor: planeAnchor, node: node)
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        if let planeAnchor = anchor as? ARPlaneAnchor, let plane = planes[planeAnchor.identifier] {
-            plane.updateWithNewAnchor(planeAnchor)
+        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+        node.enumerateChildNodes { (childNode, _) in
+            childNode.removeFromParentNode()
         }
+        drawPlaneNode(anchor: planeAnchor, node: node)
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
-        if let planeAnchor = anchor as? ARPlaneAnchor, let index = planes.index(forKey: planeAnchor.identifier) {
-            planes.remove(at: index)
+        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+        //        plane.updateWithNewAnchor(planeAnchor)
+        node.enumerateChildNodes { (childNode, _) in
+            childNode.removeFromParentNode()
         }
     }
 }
@@ -71,14 +109,15 @@ class VirtualPlane : SCNNode {
     init (anchor: ARPlaneAnchor) {
         super.init()
         self.anchor = anchor
-        self.planeGeometry = SCNPlane(width: CGFloat(anchor.extent.x), height: CGFloat(anchor.extent.y))
+        self.planeGeometry = SCNPlane(width: CGFloat(anchor.extent.x), height: CGFloat(anchor.extent.z))
         
         let material = initializePlaneMaterial()
         self.planeGeometry.materials = [material]
         
-        let planeNode = SCNNode(geometry: self.planeGeometry)
-        planeNode.position = SCNVector3(anchor.center.x, 0, anchor.center.z)
+        let planeNode = SCNNode(geometry: SCNPlane(width: CGFloat(anchor.extent.x), height: CGFloat(anchor.extent.z)))
+        planeNode.position = SCNVector3(anchor.center.x, anchor.center.y, anchor.center.z)
         planeNode.transform = SCNMatrix4MakeRotation(-.pi/2, 1, 0, 0)
+        planeNode.geometry?.firstMaterial?.isDoubleSided = true
         
         updatePlaneMaterialDimensions()
         
@@ -104,14 +143,14 @@ class VirtualPlane : SCNNode {
         let height = self.planeGeometry.height
         
         material.diffuse.contentsTransform = SCNMatrix4MakeScale(Float(width), Float(height), 1)
+        self.planeGeometry.materials[0] = material
     }
     
     func updateWithNewAnchor (_ anchor: ARPlaneAnchor) {
         self.planeGeometry.width = CGFloat(anchor.extent.x)
         self.planeGeometry.height = CGFloat(anchor.extent.y)
         
-        
-        self.position = SCNVector3(anchor.center.x, 0, anchor.center.z)
+        self.position = SCNVector3(anchor.center.x, anchor.center.y, anchor.center.z)
         
         updatePlaneMaterialDimensions()
     }
