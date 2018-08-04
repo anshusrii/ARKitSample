@@ -60,7 +60,7 @@ class SelectOptionsVC: UITableViewController {
             self.navigationController?.pushViewController(vc, animated: true)
             
         case 2:
-            guard let vc = storyboard?.instantiateViewController(withIdentifier: PlaneDetectionVC.storyboardId) else {return}
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: PlaneDetection1VC.storyboardId) else {return}
             vc.navigationController?.isNavigationBarHidden = true
             self.navigationController?.pushViewController(vc, animated: true)
             
@@ -93,7 +93,7 @@ extension ARSCNView {
         var cc = MyCameraCoordinates()
         cc.x = cameraCoordinates.translation.x
         cc.y = cameraCoordinates.translation.y
-        cc.z = cameraCoordinates.translation.z - 0.2
+        cc.z = cameraCoordinates.translation.z - 0.3
         
         return cc
     }

@@ -161,8 +161,22 @@ class WorldTrackingVC: UIViewController {
         node.position = SCNVector3Make(cameraCoords.x, cameraCoords.y, cameraCoords.z)
     }
     
+    fileprivate func addText() {
+        let textScene = SCNText(string: "Daksh", extrusionDepth: 0.2)
+        textScene.firstMaterial?.diffuse.contents = UIColor.red
+        textScene.firstMaterial?.isDoubleSided = true
+        
+        let cameraCoords = self.sceneView.getCameraCoordinates()
+        
+        let textNode = SCNNode(geometry: textScene)
+        textNode.position = SCNVector3Make(cameraCoords.x, cameraCoords.y, cameraCoords.z)
+        
+        sceneView.scene.rootNode.addChildNode(textNode)
+    }
+    
     @IBAction func addNodeAction(_ sender: Any) {
-        addHouse()
+        addText()
+//        addHouse()
         
 //        addBezierPath()
         

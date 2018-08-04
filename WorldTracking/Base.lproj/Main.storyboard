@@ -68,10 +68,10 @@
             </objects>
             <point key="canvasLocation" x="606" y="-43"/>
         </scene>
-        <!--Plane DetectionVC-->
+        <!--Plane Detection1VC-->
         <scene sceneID="uMi-d8-6bJ">
             <objects>
-                <viewController storyboardIdentifier="PlaneDetectionVC" id="1Qo-Cv-YyX" customClass="PlaneDetectionVC" customModule="WorldTracking" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlaneDetection1VC" id="1Qo-Cv-YyX" customClass="PlaneDetection1VC" customModule="WorldTracking" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S8R-SG-Fkl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

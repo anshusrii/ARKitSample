@@ -38,17 +38,28 @@ class PlaneDetectionVC: UIViewController, ARSCNViewDelegate {
             guard let planeAnchor = firstHitTestResult.anchor as? ARPlaneAnchor else { return }
             if planeAnchor.alignment == .horizontal {
                 // Add some item on horizontal plane
+                addObjectToPlane(hitTestResult: firstHitTestResult, planeAnchor: planeAnchor)
             }
         }
     }
-    /*
-    private addObjectToPlane (hitTestResult: ARHitTestResult) {
-     let transform = hitTestResult.worldTransform
-     let positionColumn = transform.columns.3
-     let initialPosition = SCNVector3(positionColumn.x, positionColumn.y, positionColumn.z)
-     
+    
+    private func addObjectToPlane (hitTestResult: ARHitTestResult, planeAnchor: ARPlaneAnchor) {
+        let transform = hitTestResult.worldTransform
+        let positionColumn = transform.columns.3
+        let initialPosition = SCNVector3(positionColumn.x,
+                                         positionColumn.y,
+                                         positionColumn.z)
+        
+        let textScene = SCNText(string: "Sudhanshu", extrusionDepth: 0.5)
+        textScene.firstMaterial?.diffuse.contents = UIColor.red
+        let textNode = SCNNode(geometry: textScene)
+        
+        guard let plane = planes.first else { return }
+        textNode.position = plane.value.position
+
+        plane.value.addChildNode(textNode)
     }
- */
+ 
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,7 +73,7 @@ class PlaneDetectionVC: UIViewController, ARSCNViewDelegate {
     private func createARConfiguration() -> ARConfiguration {
         let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravity
-        configuration.planeDetection = [.horizontal]
+        configuration.planeDetection = [.horizontal, .vertical]
         configuration.isLightEstimationEnabled = true
 //        configuration.providesAudioData = false // Experiment on it
         return configuration
@@ -114,7 +125,7 @@ class VirtualPlane : SCNNode {
         let material = initializePlaneMaterial()
         self.planeGeometry.materials = [material]
         
-        let planeNode = SCNNode(geometry: SCNPlane(width: CGFloat(anchor.extent.x), height: CGFloat(anchor.extent.z)))
+        let planeNode = SCNNode(geometry: self.planeGeometry)
         planeNode.position = SCNVector3(anchor.center.x, anchor.center.y, anchor.center.z)
         planeNode.transform = SCNMatrix4MakeRotation(-.pi/2, 1, 0, 0)
         planeNode.geometry?.firstMaterial?.isDoubleSided = true

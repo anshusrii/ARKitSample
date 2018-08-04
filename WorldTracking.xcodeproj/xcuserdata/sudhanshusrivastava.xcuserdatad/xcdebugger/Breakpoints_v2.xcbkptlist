@@ -4,19 +4,11 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.SwiftErrorBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WorldTracking/SelectOptionsVC.swift"
-            timestampString = "554841279.303665"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "tableView(_:numberOfRowsInSection:)"
-            landmarkType = "7">
+            continueAfterRunningActions = "No">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -25,13 +17,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WorldTracking/ObjectDetectionVC.swift"
-            timestampString = "554841279.303781"
+            filePath = "WorldTracking/PlaneDetectionVC.swift"
+            timestampString = "555099417.319769"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "renderer(_:nodeFor:)"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "handleScreenTap(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +34,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WorldTracking/PlaneDetectionVC.swift"
-            timestampString = "554841381.5878839"
+            timestampString = "555099417.325794"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "renderer(_:didAdd:for:)"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "addObjectToPlane(hitTestResult:planeAnchor:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WorldTracking/WorldTrackingVC.swift"
+            timestampString = "555099417.325946"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "addText()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
