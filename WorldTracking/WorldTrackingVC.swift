@@ -163,13 +163,18 @@ class WorldTrackingVC: UIViewController {
     
     fileprivate func addText() {
         let textScene = SCNText(string: "Daksh", extrusionDepth: 0.2)
-        textScene.firstMaterial?.diffuse.contents = UIColor.red
-        textScene.firstMaterial?.isDoubleSided = true
         
-        let cameraCoords = self.sceneView.getCameraCoordinates()
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.green
+        textScene.materials = [material]
+        
+//        textScene.firstMaterial?.isDoubleSided = true
+        
+//        let cameraCoords = self.sceneView.getCameraCoordinates()
         
         let textNode = SCNNode(geometry: textScene)
-        textNode.position = SCNVector3Make(cameraCoords.x, cameraCoords.y, cameraCoords.z)
+        textNode.position = SCNVector3(0, 0.2, -0.3)
+        textNode.scale = SCNVector3(0.01, 0.01, 0.01)
         
         sceneView.scene.rootNode.addChildNode(textNode)
     }
